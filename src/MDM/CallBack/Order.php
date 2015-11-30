@@ -7,7 +7,7 @@ class Order
 {
 	protected $_table = "payments_callback";
 
-	public function __construct($order_id, $params)
+	public function __construct ($order_id, $params)
 	{
 		$db = new db();
 
@@ -17,4 +17,5 @@ class Order
 
 		return $db->insert($this->_table,$fields);
 	}
+
 }

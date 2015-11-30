@@ -28,7 +28,8 @@ class Listener
 
 	protected function updateOrder($order_id , $callback)
 	{
-		new MDB($order_id, $callback);
+		$MDM = new MDB();
+		return $MDM->updateOrder($order_id, array_change_key_case($callback, CASE_LOWER));
 	}
 
 	protected function insertLog($order_id , $callback)

@@ -70,12 +70,10 @@ class db extends PDO {
 		if($driver == 'sqlite') {
 			$sql = "PRAGMA table_info('" . $table . "');";
 			$key = "name";
-		}
-		elseif($driver == 'mysql') {
+		} elseif ($driver == 'mysql') {
 			$sql = "DESCRIBE " . $table . ";";
 			$key = "Field";
-		}
-		else {	
+		} else {	
 			$sql = "SELECT column_name FROM information_schema.columns WHERE table_name = '" . $table . "';";
 			$key = "column_name";
 		}	

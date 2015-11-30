@@ -1,4 +1,4 @@
-CREATE TABLE `mdmbank`.`payments` ( 
+CREATE TABLE `payments` ( 
 	`id` int(11) NOT NULL AUTO_INCREMENT , 
 	`timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
 	`last_update` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
@@ -11,7 +11,7 @@ CREATE TABLE `mdmbank`.`payments` (
 ) 
 ENGINE = InnoDB;
 
-CREATE TABLE `mdmbank`.`payments_callback` (
+CREATE TABLE `payments_callback` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`order_id` varchar(12) NOT NULL,
 	`json_answer` text NOT NULL,
