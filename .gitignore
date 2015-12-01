@@ -1,5 +1,6 @@
 ﻿# Игнорирование файла во ВСЕХ директориях
 # Например /params/db/config.php, /config.php
-dbconfig.php
+dbconf.php
 # Игнорирование файла в корне
 /autoload.php
+/nbproject/
