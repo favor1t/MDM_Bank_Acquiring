@@ -7,7 +7,7 @@
 	<li>CURRENCY</li>
 	<li>ORDER</li>
 	<li>RRN</li>
-	<li>INT_REF</li>
+	<li>INTREF</li>
 	<li>AUTH_CODE</li>
 	<li>PAN</li>
 	<li>BACKREF</li>
@@ -24,7 +24,9 @@
 	<li>MERCH_URL</li>
 	<li>TERMINAL</li>
 	<li>EMAIL</li>
-	<li>TRTYPE</li>
+	<li>TRTYPE <br/>
+            <p>0: pre authorization</p>
+        </li>
 	<li>COUNTRY</li>
 	<li>MERC_GMT</li>
 	<li>TIMESTAMP</li>
@@ -32,19 +34,18 @@
         <li>ORDER</li>
 </ul>
 
-<h4>Authorization Fields</h4>
+<h4>Complete Fields</h4>
 <ul>
 	<li>AMOUNT</li>
 	<li>CURRENCY</li>
-	<li>DESC</li>
-	<li>MERCH_NAME</li>
-	<li>MERCH_URL</li>
+	<li>ORDER</li>
+	<li>RNN</li>
+	<li>INTREF</li>
 	<li>TERMINAL</li>
-	<li>EMAIL</li>
-	<li>TRTYPE</li>
-	<li>COUNTRY</li>
-	<li>MERC_GMT</li>
 	<li>TIMESTAMP</li>
-        <li>BACKREF</li>
-        <li>ORDER</li>
+	<li>MERC_GMT</li>
+        <li>TRTYPE <br/>
+            <p>21: confirm order</p>
+            <p>22: cancel order</p>
+        </li>
 </ul>
