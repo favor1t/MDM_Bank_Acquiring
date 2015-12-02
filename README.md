@@ -1,5 +1,9 @@
 ﻿<h2>MDM Bank Acquiring</h2>
 
+<h4>REQUIREMENTS</h4>
+<p>PHP >= 5.3 </p>
+<p>Git >=1.5</p>
+
 <h4>CALLBACK Fields</h4>
 <ul>
 	<li>RESULT</li>
