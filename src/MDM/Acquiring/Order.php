@@ -52,18 +52,36 @@ class Order extends \MDM\Acquiring\Form
         
         $this->setOption($data);
         $this->setTimestamp();
-        $this->generateOrder($data['account_number'], $db);
+        $order = $this->generateOrder($data['account_number'], $db);
         $params = $this->preUpdate($this->getOptions());
             
-        return $db->insert($this->_table,$params);
+        if($db->insert($this->_table,$params)>0){
+            return $order;
+        }
+        
+        return false;
 
     }
+    
+    /**
+     * 
+     * @param type $order_id
+     * @return type
+     */
+    public function getFields($order_id)
+    {
+        $db = new db;
+        $db_fields = $db->select($this->_table, "order_mdm = :order_mdm", array(":order_mdm"=>$order_id), "order_mdm, terminal_mdm, intref_mdm, trtype_mdm, rrn_mdm, timestamp_mdm, trtype_mdm, currency_mdm, amount_mdm");
+
+        return $this->preReturn($db_fields[0]);
+    }
+    
     /**
      * 
      * @param type $account_number
      * @param db $db
      */
-    protected function generateOrder($account_number,db $db)
+    public function generateOrder($account_number,db $db)
     {
 
         $count = $db->run("SELECT COUNT(*) FROM $this->_table");
@@ -80,7 +98,7 @@ class Order extends \MDM\Acquiring\Form
      * @param type $data
      * @return type
      */
-    private function preUpdate( $data )
+    protected function preUpdate( $data )
     {
         if(is_array($data)){
             $array = array();
@@ -93,4 +111,14 @@ class Order extends \MDM\Acquiring\Form
         }
 
     }
+    
+    protected function preReturn($fields)
+    { 
+        foreach(array_change_key_case($fields, CASE_UPPER) as $k=>$v){
+            $this->setOption(substr($k,0,-strlen($this->_prefixfields)),$v);
+        }
+        
+        return $this->getOptions();
+    }
+    
 }

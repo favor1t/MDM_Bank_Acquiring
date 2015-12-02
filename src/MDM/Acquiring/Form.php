@@ -30,8 +30,8 @@ class Form {
         "TERMINAL" => "00000000",
         "EMAIL" => "",
         "TRTYPE" => "",
-        "COUNTRY" => "",
-        "MERC_GMT" => "",
+        "COUNTRY" => "RU",
+        "MERC_GMT" => "+3",
         "TIMESTAMP" => "",
         "BACKREF" => "",
         "TIMESTAMP" => "",
@@ -84,25 +84,13 @@ class Form {
         if (is_array($key)){
             foreach (array_change_key_case($key,CASE_UPPER) as $k=>$v){
                if(array_key_exists($k, $this->options)){
-                    if($key=="AMOUNT"){
-                        $this->options[$key] = number_format($value,2,'.','');
-                    } else {
-                        $this->options[$key] = $value;
-                    }
+                    $this->isAmount($k, $v);
                 }
             }    
-            return $this->options;
             
-        } elseif (isset($key)) {
+        } elseif (isset($value)) {
             if(array_key_exists($key, $this->options)){
-                
-                if($key=="AMOUNT"){
-                    $this->options[$key] = number_format($value,2,'.','');
-                } else {
-                    $this->options[$key] = $value;
-                }
-                
-                return $this->options[$key];
+                $this->isAmount($key, $value);
             }
         }
 
@@ -137,9 +125,19 @@ class Form {
         $this->setOption("TIMESTAMP", date($format));
     }
     
-    protected function formatNumber()
+    /**
+     * 
+     * @param type $k
+     * @param type $v
+     */
+    public function isAmount($k, $v)
     {
-        
+        if($k=="AMOUNT"){
+            $this->options[$k] =  number_format(120.00,2,'.','');
+        } else {
+            $this->options[$k] = $v;
+        }
+          
     }
 
 }
