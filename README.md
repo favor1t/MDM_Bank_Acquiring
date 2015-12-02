@@ -14,3 +14,37 @@
 	<li>TERMINAL</li>
 	<li>TRTYPE</li>
 </ul>
+
+<h4>Authorization Fields</h4>
+<ul>
+	<li>AMOUNT</li>
+	<li>CURRENCY</li>
+	<li>DESC</li>
+	<li>MERCH_NAME</li>
+	<li>MERCH_URL</li>
+	<li>TERMINAL</li>
+	<li>EMAIL</li>
+	<li>TRTYPE</li>
+	<li>COUNTRY</li>
+	<li>MERC_GMT</li>
+	<li>TIMESTAMP</li>
+        <li>BACKREF</li>
+        <li>ORDER</li>
+</ul>
+
+<h4>Authorization Fields</h4>
+<ul>
+	<li>AMOUNT</li>
+	<li>CURRENCY</li>
+	<li>DESC</li>
+	<li>MERCH_NAME</li>
+	<li>MERCH_URL</li>
+	<li>TERMINAL</li>
+	<li>EMAIL</li>
+	<li>TRTYPE</li>
+	<li>COUNTRY</li>
+	<li>MERC_GMT</li>
+	<li>TIMESTAMP</li>
+        <li>BACKREF</li>
+        <li>ORDER</li>
+</ul>
