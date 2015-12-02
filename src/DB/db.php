@@ -4,16 +4,23 @@ namespace DB;
 use PDO;
 use PDOException;
 
+/**
+ * 
+ */
 class db extends PDO {
 	private $error;
 	private $sql;
 	private $bind;
 	private $errorCallbackFunction;
 	private $errorMsgFormat;
-
+        
+        /**
+         * 
+         */
 	public function __construct() {
 		include "dbconf.php";
-		$dsn = "mysql:host=".$_dbconf['host'].";port=".$_dbconf['port'].";dbname=".$_dbconf['dbname'];
+		
+                $dsn = "mysql:host=".$_dbconf['host'].";port=".$_dbconf['port'].";dbname=".$_dbconf['dbname'];
 		
 		try {
 			parent::__construct($dsn, $_dbconf["dblogin"], $_dbconf["dbpasw"], $_dbconf['options']);
@@ -21,7 +28,10 @@ class db extends PDO {
 			$this->error = $e->getMessage();
 		}
 	}
-
+        
+        /**
+         * 
+         */
 	private function debug() {
 		if(!empty($this->errorCallbackFunction)) {
 			$error = array("Error" => $this->error);
@@ -59,12 +69,24 @@ class db extends PDO {
 			$func($msg);
 		}
 	}
-
+        
+        /**
+         * 
+         * @param type $table
+         * @param type $where
+         * @param type $bind
+         */
 	public function delete($table, $where, $bind="") {
 		$sql = "DELETE FROM " . $table . " WHERE " . $where . ";";
 		$this->run($sql, $bind);
 	}
-
+        
+        /**
+         * 
+         * @param type $table
+         * @param type $info
+         * @return type
+         */
 	private function filter($table, $info) {
 		$driver = $this->getAttribute(PDO::ATTR_DRIVER_NAME);
 		if($driver == 'sqlite') {
@@ -86,7 +108,12 @@ class db extends PDO {
 		}
 		return array();
 	}
-
+        
+        /**
+         * 
+         * @param type $bind
+         * @return array
+         */
 	private function cleanup($bind) {
 		if(!is_array($bind)) {
 			if(!empty($bind))
@@ -96,7 +123,13 @@ class db extends PDO {
 		}
 		return $bind;
 	}
-
+        
+        /**
+         * 
+         * @param type $table
+         * @param type $info
+         * @return type
+         */
 	public function insert($table, $info) {
 		$fields = $this->filter($table, $info);
 		$sql = "INSERT INTO " . $table . " (" . implode($fields, ", ") . ") VALUES (:" . implode($fields, ", :") . ");";
@@ -105,7 +138,13 @@ class db extends PDO {
 			$bind[":$field"] = $info[$field];
 		return $this->run($sql, $bind);
 	}
-
+        
+        /**
+         * 
+         * @param type $sql
+         * @param type $bind
+         * @return boolean
+         */
 	public function run($sql, $bind="") {
 		$this->sql = trim($sql);
 		$this->bind = $this->cleanup($bind);
@@ -125,7 +164,15 @@ class db extends PDO {
 			return false;
 		}
 	}
-
+        
+        /**
+         * 
+         * @param type $table
+         * @param type $where
+         * @param type $bind
+         * @param type $fields
+         * @return type
+         */
 	public function select($table, $where="", $bind="", $fields="*") {
 		$sql = "SELECT " . $fields . " FROM " . $table;
 		if(!empty($where))
@@ -133,7 +180,12 @@ class db extends PDO {
 		$sql .= ";";
 		return $this->run($sql, $bind);
 	}
-
+        
+        /**
+         * 
+         * @param string $errorCallbackFunction
+         * @param string $errorMsgFormat
+         */
 	public function setErrorCallbackFunction($errorCallbackFunction, $errorMsgFormat="html") {
 		//Variable functions for won't work with language constructs such as echo and print, so these are replaced with print_r.
 		if(in_array(strtolower($errorCallbackFunction), array("echo", "print")))
@@ -146,7 +198,15 @@ class db extends PDO {
 			$this->errorMsgFormat = $errorMsgFormat;	
 		}	
 	}
-
+        
+        /**
+         * 
+         * @param type $table
+         * @param type $info
+         * @param type $where
+         * @param type $bind
+         * @return type
+         */
 	public function update($table, $info, $where, $bind="") {
 		$fields = $this->filter($table, $info);
 		$fieldSize = sizeof($fields);

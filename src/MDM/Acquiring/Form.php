@@ -23,18 +23,25 @@ class Form {
         "AMOUNT" => "",
         "CURRENCY" => "",
         "ORDER" => "",
-        "DESC" => "",
+        "DESC" => "Description ...",
         "MERCH_NAME" => "",
         "MERCH_URL" => "",
         "MERCHANT" => "",
-        "TERMINAL" => "",
+        "TERMINAL" => "00000000",
         "EMAIL" => "",
         "TRTYPE" => "",
         "COUNTRY" => "",
         "MERC_GMT" => "",
         "TIMESTAMP" => "",
-        "BACKREF" => ""
+        "BACKREF" => "",
+        "TIMESTAMP" => "",
     );
+
+    /**
+     *
+     * @var type 
+     */
+    protected $_URL = "https://mdmbank/...";
     
     /**
      * 
@@ -65,17 +72,40 @@ class Form {
     }
     
     /**
+     * @example setOption (Array("param1"=>"value1", "param2"=>"value2"));
+     * @example setOption ($param, $value);
      * 
      * @param type $key
      * @param type $value
-     * @return \MDM\Acquiring\Form
+     * @return type
      */
-    public function setOption($key,$value) 
+    public function setOption($key,$value="") 
     {
-        if(array_key_exists($key, $this->options)){
-            $this->options[$key] = $options;
-            return $this[$key];
+        if (is_array($key)){
+            foreach (array_change_key_case($key,CASE_UPPER) as $k=>$v){
+               if(array_key_exists($k, $this->options)){
+                    if($key=="AMOUNT"){
+                        $this->options[$key] = number_format($value,2,'.','');
+                    } else {
+                        $this->options[$key] = $value;
+                    }
+                }
+            }    
+            return $this->options;
+            
+        } elseif (isset($key)) {
+            if(array_key_exists($key, $this->options)){
+                
+                if($key=="AMOUNT"){
+                    $this->options[$key] = number_format($value,2,'.','');
+                } else {
+                    $this->options[$key] = $value;
+                }
+                
+                return $this->options[$key];
+            }
         }
+
     }
    
     /**
@@ -87,5 +117,29 @@ class Form {
         return $this->options;
     }
 
+    /**
+     * 
+     * @return type
+     */
+    public function getURL()
+    {
+       return $this->_URL; 
+    }
+    
+    /**
+     * 
+     * @param type $format
+     * @param type $timezone
+     */
+    protected function setTimestamp($format="YmdHis", $timezone="UTC")
+    {
+        date_default_timezone_set($timezone);
+        $this->setOption("TIMESTAMP", date($format));
+    }
+    
+    protected function formatNumber()
+    {
+        
+    }
 
 }
