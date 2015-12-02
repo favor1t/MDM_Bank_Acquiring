@@ -4,3 +4,4 @@ dbconf.php
 # Игнорирование файла в корне
 /autoload.php
 /nbproject/
+/template/
