@@ -6,13 +6,24 @@ use DB\db as db;
 class DBOrder
 {
 	protected $_table = "payments";
-
+        
+        /**
+         * 
+         * @param type $order_id
+         * @param type $params
+         * @return type
+         */
 	public function updateOrder( $order_id, $params )
 	{
             $db = new db();
             return $db->update( $this->_table,$params,"ORDER_ID = :ORDER_ID", array(":ORDER_ID"=>$order_id) );
 	}
-
+        
+        /**
+         * 
+         * @param type $data
+         * @return type
+         */
 	public function insertOrder( $data )
 	{
             $db = new db();
@@ -26,7 +37,11 @@ class DBOrder
             return $db->insert($this->_table,$data);
 
 	}
-
+        /**
+         * 
+         * @param type $account_number
+         * @param db $db
+         */
 	protected function generateOrderID($account_number,db $db)
 	{
             

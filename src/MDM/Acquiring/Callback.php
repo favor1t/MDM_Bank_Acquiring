@@ -3,10 +3,19 @@ namespace MDM\Acquiring;
 
 use DB\db as db;
 
+/**
+ * 
+ */
 class Callback
 {
 	protected $_table = "payments_callback";
-
+        
+        /**
+         * 
+         * @param type $order_id
+         * @param type $params
+         * @return type
+         */
 	public function __construct ($order_id, $params)
 	{
 		$db = new db();
