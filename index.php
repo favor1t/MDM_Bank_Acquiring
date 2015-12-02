@@ -12,14 +12,18 @@
 
 use MDM\Acquiring\Order as Order;   
 
-if ( isset($_POST['account_number']) && ($_POST['account_number']>0) ){ 
+$data = filter_input_array(INPUT_POST);
+
+if ( isset($data['account_number']) && ($data['account_number']>0) ){ 
     $order = new Order();
-    $status = $order->insertOrder($_POST);
+    $order_id = $order->insertOrder($data);
     
-    if($status>0){
-        echo "Запись произведена";
+    if($order_id>0){
+        $order->setOption("TRTYPE", "0");   //устанавливаем статус в 0
+        $fields = $order->getFields($order_id);
+        var_dump($fields);
     }
-}
+} else {
 ?>
         <h4>Пополнить лицевой счет по софинансированию</h4>
         <form enctype="application/x-www-form-urlecoded" method="POST">
@@ -31,9 +35,11 @@ if ( isset($_POST['account_number']) && ($_POST['account_number']>0) ){
                <label for="amount">Сумма</label>
                <input name="amount" type="text" id="amount" placeholder="XXXX.XX">
             </div>
-    <input name="CURRENCY" type="hidden" value="RUB">
- <button type="submit">Пополнить</button>
+    <input name="currency" type="hidden" value="RUB">
+    <button type="submit">Пополнить</button>
         </form>
-        
+ <?php
+ }
+ ?>       
     </body>
 </html>
