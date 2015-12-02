@@ -1,8 +1,8 @@
 <?php
 namespace MDM\Acquiring;
 
-use MDM\DB\Order as MDB;
-use MDM\CallBack\Order as CallBack;
+use MDM\Acquiring\DBOrder as MDB;
+use MDM\Acquiring\Callback as CallBack;
 
 class Listener
 {
