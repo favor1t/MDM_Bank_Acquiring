@@ -24,7 +24,7 @@ if ( isset($data['account_number']) && ($data['account_number']>0) ){
         var_dump($fields);
 ?>        
 <!-- 
-        <form action="<? =$order->getURL() ?>" method="POST">
+        <form action="< ?=$order->getURL() ? >" method="POST">
 
         input type="hidden" name="AMOUNT"
         ...
