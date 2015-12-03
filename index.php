@@ -22,6 +22,14 @@ if ( isset($data['account_number']) && ($data['account_number']>0) ){
         $order->setOption("TRTYPE", "0");   //устанавливаем статус в 0
         $fields = $order->getFields($order_id);
         var_dump($fields);
+?>        
+<!-- 
+        <form action="<? =$order->getURL() ?>" method="POST">
+
+        input type="hidden" name="AMOUNT"
+        ...
+-->
+<?php        
     }
 } else {
 ?>

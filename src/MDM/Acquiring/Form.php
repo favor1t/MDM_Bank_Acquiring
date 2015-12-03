@@ -133,7 +133,7 @@ class Form {
     public function isAmount($k, $v)
     {
         if($k=="AMOUNT"){
-            $this->options[$k] =  number_format(120.00,2,'.','');
+            $this->options[$k] =  number_format($v,2,'.','');
         } else {
             $this->options[$k] = $v;
         }
