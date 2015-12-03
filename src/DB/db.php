@@ -4,6 +4,9 @@ namespace DB;
 use PDO;
 use PDOException;
 
+
+include "dbconf.php";
+
 /**
  * 
  */
@@ -18,12 +21,15 @@ class db extends PDO {
          * 
          */
 	public function __construct() {
-		include "dbconf.php";
 		
-                $dsn = "mysql:host=".$_dbconf['host'].";port=".$_dbconf['port'].";dbname=".$_dbconf['dbname'];
+		$options = array(
+                        PDO::ATTR_PERSISTENT => true, 
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                    );
+                $dsn = "mysql:host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME;
 		
 		try {
-			parent::__construct($dsn, $_dbconf["dblogin"], $_dbconf["dbpasw"], $_dbconf['options']);
+			parent::__construct($dsn, DB_LOGIN, DB_PASSWORD, $options);
 		} catch (PDOException $e) {
 			$this->error = $e->getMessage();
 		}
